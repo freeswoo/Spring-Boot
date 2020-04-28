@@ -91,6 +91,7 @@ public class BookController {
 			@PageableDefault Pageable page, Model model) {
 		
 		Page<BookVO> bookList = bService.getPageList(page);
+		log.debug(bookList.toString());
 		model.addAttribute("bookList",bookList);
 		return "bookList";
 	}
