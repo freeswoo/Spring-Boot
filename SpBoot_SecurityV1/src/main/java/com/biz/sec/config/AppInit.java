@@ -1,10 +1,13 @@
 package com.biz.sec.config;
 
+import java.util.Optional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.biz.sec.domain.UserRole;
 import com.biz.sec.domain.UserVO;
+import com.biz.sec.repository.BBsDao;
 import com.biz.sec.repository.UserDao;
 import com.biz.sec.repository.UserRoleDao;
 
@@ -29,6 +32,16 @@ public class AppInit implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		/*
+		 * Optional 클래스로 vo 클래스를 wrapping했을때
+		 * vo에 담긴 데이터가 있으면 isPresent() 가 true가 된다
+		 * 
+		 * 데이터가 있으면 다음 명령을 실행하지 말고
+		 * return 해서 끝내라
+		 */
+		Optional<UserVO> vo = uDao.findByUsername("freeswoo");
+		if(vo.isPresent()) return;
+		
 		UserVO userVO = UserVO
 				.builder()
 				.username("freeswoo")
@@ -49,7 +62,8 @@ public class AppInit implements CommandLineRunner {
 				.roleName("USER")
 				.build();
 		urDao.save(uRole);
-		
 	}
+	
+	
 
 }
