@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// super.configure(http);
 		
 		// react와 연동할때 security 설정
+		// 1. post 전송할때 Token 연동 하지 않음
 		httpSecurity
 		.csrf().disable()
 		
